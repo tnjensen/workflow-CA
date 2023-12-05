@@ -13,7 +13,7 @@ describe('logout user', () => {
     cy.get('input#loginEmail').type('ThoJen84480@stud.noroff.no{enter}');
     cy.get('input#loginPassword').type('!Yzems224{enter}');
     cy.get('form#loginForm.modal-content button.btn.btn-success').click;
-    cy.wait(2000);
+    cy.wait(3000);
     cy.get('button.btn.btn-outline-warning.me-2').click();
   });
 });
