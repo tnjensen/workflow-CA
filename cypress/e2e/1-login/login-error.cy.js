@@ -1,23 +1,22 @@
-describe('login user', { keystrokeDelay: 50 }, () => {
+describe('login user', () => {
   it('cannot log a user in with wrong credentials', () => {
-    cy.visit(Cypress.env('baseUrl'));
-    cy.get('[data-cy=register-email]').type(`${Cypress.env('userEmail')}`);
-    cy.get('[data-cy=register-password]').type(
-      `${Cypress.env('userPassword')}`,
-    );
-    cy.get('[data-cy=register-submit]').click();
-    cy.get('[data-cy=login-email]').type(`${Cypress.env('userEmail')}`);
-    cy.get('[data-cy=login-password]').type(
-      `${Cypress.env('userWrongPassword')}`,
-    );
-    cy.get('[data-cy=login-submit]').click();
-    cy.intercept(
-      `${Cypress.env('baseUrl')}/?view=profile&name=${Cypress.env('userName')}`,
-    ).as('profilePage');
-    cy.visit(
-      `${Cypress.env('baseUrl')}/?view=profile&name=${Cypress.env('userName')}`,
-    );
-    cy.wait('@profilePage');
-    cy.contains('Logout').should('be.visible');
+    cy.visit('http://localhost:5501');
+    cy.get('input#registerEmail').type('ThoJen84480@stud.noroff.no');
+    cy.get('input#registerPassword').type('!Yzems224');
+    cy.get(
+      'form#registerForm.modal-content button.btn.btn-outline-success',
+    ).click();
+    cy.wait(1000);
+    cy.get('input#loginEmail').type('ThoJen84480@stud.noroff.no');
+    cy.get('input#loginPassword').type('!Yzems225');
+  });
+  it('should trigger an alert with a message', () => {
+    cy.get('form#loginForm.modal-content button.btn.btn-success').click();
+
+    cy.on('window:alert', (text) => {
+      expect(text).to.contains(
+        'Either your username was not found or your password is incorrect',
+      );
+    });
   });
 });
