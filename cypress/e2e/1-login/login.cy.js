@@ -1,6 +1,6 @@
 describe('login user', () => {
   it('can log a user in', () => {
-    cy.visit('http://localhost:5501');
+    cy.visit('http://localhost:5173');
     cy.get('input#registerEmail').type('ThoJen84480@stud.noroff.no');
     cy.get('input#registerPassword').type('!Yzems224');
     cy.get(

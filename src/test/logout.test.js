@@ -1,3 +1,5 @@
+import { logout } from '../js/api/auth/logout';
+
 const MOCK_TOKEN = 1;
 
 let store = {};
@@ -8,7 +10,8 @@ const mockLocalStorage = {
 global.localStorage = mockLocalStorage;
 
 describe('remove token', () => {
-  it('deletes the access token', () => {
+  it('logs out and deletes the access token', () => {
+    logout();
     mockLocalStorage.removeItem(MOCK_TOKEN);
     expect(mockLocalStorage.removeItem).toHaveBeenCalled();
   });
